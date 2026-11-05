@@ -35,7 +35,7 @@ function toast(s){const t=el('toast');t.textContent=s;t.classList.add('show');cl
 function heading(title,sub,action=''){return '<div class="page-heading"><div><div class="eyebrow">GREENLEAF WORKSPACE</div><h1>'+title+'</h1><p>'+sub+'</p></div>'+action+'</div>'}
 function btn(label,action,cls=''){return '<button class="btn '+cls+'" data-action="'+action+'">'+label+'</button>'}
 function stat(label,value,icon,note){return '<div class="stat"><div class="stat-top"><span>'+label+'</span><span class="stat-icon">'+icon+'</span></div><strong>'+value+'</strong><small>'+note+'</small></div>'}
-function table(headers,rows){return '<div class="table-wrap"><table><thead><tr>'+headers.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+(rows||[]).join('')+'</tbody></table></div>'}
+function table(headers,rows){const body=Array.isArray(rows)?rows.join(''):String(rows??'');return '<div class="table-wrap"><table><thead><tr>'+headers.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+body+'</tbody></table></div>'}
 function productRows(list){return list.map(p=>'<tr><td><div class="plant-cell"><div class="plant-thumb">'+esc(p.emoji||'🌱')+'</div><div><b>'+esc(p.name)+'</b><small>'+esc(p.category)+'</small></div></div></td><td>'+money(p.price)+'</td><td>'+p.qty+'</td><td><span class="pill '+(p.qty<=p.reorder?'bad':'')+'">'+(p.qty<=p.reorder?'Low stock':'In stock')+'</span></td><td>'+esc(p.supplier||'—')+'</td><td><button class="btn secondary" data-action="edit-product" data-id="'+p.id+'">Edit</button> <button class="btn danger" data-action="delete-product" data-id="'+p.id+'">×</button></td></tr>').join('')}
 function dashboard(){
   const products=Array.isArray(data.products)?data.products:[];
