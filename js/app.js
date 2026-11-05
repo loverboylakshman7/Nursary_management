@@ -1,7 +1,33 @@
 (()=>{'use strict';
 const KEY='greenleaf_nursery_v1';
 const seed={products:[{id:1,name:'Areca Palm',category:'Indoor',price:450,qty:24,reorder:5,supplier:'Green Valley',emoji:'🌴',care:'Bright indirect light; water when top soil dries.'},{id:2,name:'Snake Plant',category:'Indoor',price:320,qty:18,reorder:5,supplier:'Leaf & Root',emoji:'🪴',care:'Low water; indirect light.'},{id:3,name:'Tulsi',category:'Herbs',price:80,qty:42,reorder:10,supplier:'Green Valley',emoji:'🌿',care:'Full sun; keep soil lightly moist.'},{id:4,name:'Rose',category:'Flowering',price:180,qty:7,reorder:8,supplier:'Bloom Nursery',emoji:'🌹',care:'At least 6 hours of sunlight.'},{id:5,name:'Marigold',category:'Flowering',price:45,qty:65,reorder:12,supplier:'Bloom Nursery',emoji:'🌼',care:'Full sun; deadhead spent flowers.'},{id:6,name:'Terracotta Pot',category:'Pots',price:120,qty:31,reorder:6,supplier:'Clay Works',emoji:'🏺',care:'Clean periodically.'}],customers:[{id:1,name:'Ananya Rao',phone:'9876543210',email:'ananya@example.com'},{id:2,name:'Rahul Kumar',phone:'9876501234',email:'rahul@example.com'}],suppliers:[{id:1,name:'Green Valley',phone:'9000011111',email:'hello@greenvalley.in'},{id:2,name:'Bloom Nursery',phone:'9000022222',email:'sales@bloom.in'},{id:3,name:'Clay Works',phone:'9000033333',email:'orders@clayworks.in'}],sales:[],purchases:[],tasks:[{id:1,plant:'Areca Palm',task:'Watering',due:new Date().toISOString().slice(0,10),status:'Pending'},{id:2,plant:'Rose',task:'Pruning',due:new Date().toISOString().slice(0,10),status:'Pending'}],settings:{business:'GreenLeaf Nursery',currency:'INR',lowStock:5}};
-let data;try{data=JSON.parse(localStorage.getItem(KEY))||structuredClone(seed)}catch(e){data=structuredClone(seed)}
+const clone=o=>JSON.parse(JSON.stringify(o));
+let data;try{data=JSON.parse(localStorage.getItem(KEY))||clone(seed)}catch(e){data=clone(seed)}
+// Backfill missing collections for older browser data without overwriting existing records.
+data.products=Array.isArray(data.products)?data.products:clone(seed.products);
+data.customers=Array.isArray(data.customers)?data.customers:clone(seed.customers);
+data.suppliers=Array.isArray(data.suppliers)?data.suppliers:clone(seed.suppliers);
+data.sales=Array.isArray(data.sales)?data.sales:[];
+data.purchases=Array.isArray(data.purchases)?data.purchases:[];
+data.tasks=Array.isArray(data.tasks)?data.tasks:clone(seed.tasks);
+data.settings=data.settings||clone(seed.settings);
+// Add realistic demo transactions only when both transaction lists are empty.
+if(data.sales.length===0&&data.purchases.length===0){
+  const ago=n=>new Date(Date.now()-n*86400000).toISOString();
+  data.sales=[
+    {id:101,invoice:'GL-26001',date:ago(3),customer:'Ananya Rao',items:[{product:'Areca Palm',qty:2,price:450}],payment:'UPI',total:900},
+    {id:102,invoice:'GL-26002',date:ago(9),customer:'Rahul Kumar',items:[{product:'Snake Plant',qty:1,price:320},{product:'Terracotta Pot',qty:2,price:120}],payment:'Cash',total:560},
+    {id:103,invoice:'GL-26003',date:ago(18),customer:'Priya Sharma',items:[{product:'Rose',qty:3,price:180}],payment:'Card',total:540},
+    {id:104,invoice:'GL-26004',date:ago(34),customer:'Ananya Rao',items:[{product:'Tulsi',qty:4,price:80}],payment:'UPI',total:320},
+    {id:105,invoice:'GL-26005',date:ago(61),customer:'Walk-in customer',items:[{product:'Marigold',qty:10,price:45}],payment:'Cash',total:450},
+    {id:106,invoice:'GL-26006',date:ago(92),customer:'Rahul Kumar',items:[{product:'Areca Palm',qty:1,price:450}],payment:'UPI',total:450}
+  ];
+  data.purchases=[
+    {id:201,ref:'PO-26001',date:ago(12),supplier:'Green Valley',product:'Areca Palm',qty:12,cost:3600},
+    {id:202,ref:'PO-26002',date:ago(28),supplier:'Bloom Nursery',product:'Rose',qty:24,cost:2400},
+    {id:203,ref:'PO-26003',date:ago(45),supplier:'Clay Works',product:'Terracotta Pot',qty:20,cost:1400}
+  ];
+}
 const save=()=>localStorage.setItem(KEY,JSON.stringify(data)),money=n=>'₹'+Number(n||0).toLocaleString('en-IN',{maximumFractionDigits:2}),el=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let page='dashboard',toastTimer;
 const names={dashboard:'Dashboard',plants:'Plants & Products',sales:'Sales & Billing',purchases:'Purchases',customers:'Customers',suppliers:'Suppliers',care:'Plant Care',reports:'Reports',settings:'Settings'};
@@ -34,7 +60,7 @@ if(a==='toggle-task'){let t=data.tasks.find(x=>x.id===Number(id));if(t)t.status=
 if(a==='save-settings'){data.settings.business=el('businessName').value.trim()||'GreenLeaf Nursery';save();toast('Settings saved');return}
 if(a==='backup'){download('greenleaf-backup.json',JSON.stringify(data,null,2),'application/json');return}
 if(a==='export-csv'){let rows=[['Product','Category','Price','Quantity','Supplier'],...data.products.map(p=>[p.name,p.category,p.price,p.qty,p.supplier])];download('greenleaf-inventory.csv',rows.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\n'),'text/csv');return}
-if(a==='reset'){if(confirm('Replace all current records with sample data? This cannot be undone.')){data=structuredClone(seed);save();render();toast('Sample data restored')}return}
+if(a==='reset'){if(confirm('Replace all current records with sample data? This cannot be undone.')){data=clone(seed);save();render();toast('Sample data restored')}return}
 if(a==='close-modal')el('modalBackdrop').classList.remove('show')}
 function download(name,content,type){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
 document.addEventListener('click',e=>{const nav=e.target.closest('[data-page]');if(nav){page=nav.dataset.page;el('sidebar').classList.remove('open');render();return}const b=e.target.closest('[data-action]');if(b)act(b.dataset.action,b.dataset.id,b.dataset.type)});
