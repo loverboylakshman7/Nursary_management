@@ -5,11 +5,16 @@ const clone=o=>JSON.parse(JSON.stringify(o));
 let data;try{data=JSON.parse(localStorage.getItem(KEY))||clone(seed)}catch(e){data=clone(seed)}
 // Backfill missing collections for older browser data without overwriting existing records.
 data.products=Array.isArray(data.products)?data.products:clone(seed.products);
+// If this browser has an empty catalogue, load the starter nursery products.
+if(data.products.length===0)data.products=clone(seed.products);
 data.customers=Array.isArray(data.customers)?data.customers:clone(seed.customers);
+if(data.customers.length===0)data.customers=clone(seed.customers);
 data.suppliers=Array.isArray(data.suppliers)?data.suppliers:clone(seed.suppliers);
+if(data.suppliers.length===0)data.suppliers=clone(seed.suppliers);
 data.sales=Array.isArray(data.sales)?data.sales:[];
 data.purchases=Array.isArray(data.purchases)?data.purchases:[];
 data.tasks=Array.isArray(data.tasks)?data.tasks:clone(seed.tasks);
+if(data.tasks.length===0)data.tasks=clone(seed.tasks);
 data.settings=data.settings||clone(seed.settings);
 // Add realistic demo transactions only when both transaction lists are empty.
 if(data.sales.length===0&&data.purchases.length===0){
