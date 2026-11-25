@@ -1,32 +1,23 @@
-# GreenLeaf Nursery
+# GreenLeaf
 
-GreenLeaf is being developed as a two-part nursery platform:
+A static, responsive plant-shopping website hosted with GitHub Pages.
 
-- `index.html` — existing nursery administration dashboard (inventory, sales, customers, reports).
-- `shop.html` — customer-facing plant storefront with search, category filters, shopping bag and WhatsApp order handoff.
+## Architecture
+- HTML, CSS and vanilla JavaScript
+- No database or backend
+- No localStorage, cookies, IndexedDB or browser persistence
+- Product catalogue is defined in `assets/js/app.js`
+- Shopping cart exists only in page memory and resets on refresh
+- Checkout hands the order to the nursery through WhatsApp
 
-## Customer storefront
+## Owner contact
+WhatsApp: +91 99085 16488
 
-Open `shop.html` or visit the GitHub Pages site at `/shop.html`.
+## Update products
+Edit the `products` array in `assets/js/app.js`, then commit the change to the `main` branch.
 
-### WhatsApp ordering
-The storefront is configured to contact the nursery at **+91 99085 16488**. Customers can:
-- Open a general support chat from the contact and floating WhatsApp buttons.
-- Add plants to the bag and adjust quantities.
-- Submit name, phone and delivery address to generate a WhatsApp order summary.
-- Review stock, delivery charges and final amount directly with the owner.
+## Deploy
+In GitHub, open **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`. GitHub Pages publishes the static site.
 
-WhatsApp click-to-chat does not submit an order automatically. The customer must send the prefilled message, and the nursery must confirm the order. No payment is collected by this static storefront.
-
-## Data and deployment status
-
-- The existing admin dashboard uses browser localStorage; it is not shared cloud storage.
-- The storefront currently uses a local browser cart and a sample catalog in `js/shop.js`.
-- A starter database design is in `supabase/schema.sql`. It is not deployed.
-- Supabase currently has no project connected to this ChatGPT session. To enable shared online products/orders, connect or create the intended Supabase project, then configure public catalog reads and a trusted order-creation function with RLS.
-- Do not expose Supabase service-role/secret keys in frontend code.
-- Product imagery currently loads from remote Unsplash image URLs.
-
-## Run locally
-
-Because this is a static site, open `shop.html` in a browser or serve the repository with a local static server. GitHub Pages can host both the admin dashboard and storefront.
+## Important
+Orders are not stored by this website. The customer must send the prepared WhatsApp message and the nursery must confirm availability, delivery and payment directly.
