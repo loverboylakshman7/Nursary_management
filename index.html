@@ -1,57 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#244d3b" />
-  <title>GreenLeaf — Nursery Management</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css" />
-</head>
-<body>
-  <div class="app-shell">
-    <aside class="sidebar" id="sidebar">
-      <a class="brand" href="#" aria-label="GreenLeaf home">
-        <span class="brand-mark">✿</span><span><b>greenleaf</b><small>nursery management</small></span>
-      </a>
-      <div class="side-label">WORKSPACE</div>
-      <nav class="nav-list" id="navigation">
-        <button class="nav-item active" data-page="dashboard"><span>⌂</span>Dashboard</button>
-        <button class="nav-item" data-page="plants"><span>♧</span>Plants & Products</button>
-        <button class="nav-item" data-page="sales"><span>▤</span>Sales & Billing</button>
-        <button class="nav-item" data-page="purchases"><span>⇩</span>Purchases</button>
-        <button class="nav-item" data-page="customers"><span>♙</span>Customers</button>
-        <button class="nav-item" data-page="suppliers"><span>♧</span>Suppliers</button>
-        <button class="nav-item" data-page="care"><span>☼</span>Plant Care</button>
-        <button class="nav-item" data-page="reports"><span>▥</span>Reports</button>
-      </nav>
-      <div class="sidebar-bottom">
-        <div class="help-card"><span class="help-icon">✦</span><b>Grow better, every day.</b><p>Keep your nursery organized and thriving.</p></div>
-        <button class="nav-item" data-page="settings"><span>⚙</span>Settings</button>
-        <div class="profile"><div class="avatar">A</div><div><b>Admin</b><small>Administrator</small></div><span class="profile-dot"></span></div>
-      </div>
-    </aside>
-
-    <main class="main">
-      <header class="topbar">
-        <button class="mobile-menu" id="menuToggle" aria-label="Toggle menu">☰</button>
-        <div class="breadcrumb"><span>Workspace</span><i>/</i><b id="pageCrumb">Dashboard</b></div>
-        <div class="top-actions">
-          <span class="today" id="todayLabel"></span>
-          <button class="icon-button" id="topAddBtn" title="Add a plant">＋</button>
-          <div class="top-avatar">A</div>
-        </div>
-      </header>
-      <section class="content" id="pageContent"></section>
-      <footer>© 2026 GreenLeaf Nursery <span>•</span> Nursery Business Management Software</footer>
-    </main>
-  </div>
-  <div class="toast" id="toast" role="status"></div>
-  <div class="modal-backdrop" id="modalBackdrop">
-    <section class="modal" id="modal" role="dialog" aria-modal="true"></section>
-  </div>
-  <script src="js/app.js?v=20261105-5"></script>
-</body>
-</html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173d2d"><meta name="description" content="Shop healthy indoor plants, flowering plants and planters at GreenLeaf."><title>GreenLeaf — Bring Nature Home</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/shop.css"></head>
+<body><div class="announcement">A little more green makes every day better <span>✳</span> Orders confirmed directly with our team</div>
+<header class="header"><a class="logo" href="index.html"><span class="logo-mark">✿</span><span>greenleaf<small>GROW WITH US</small></span></a><nav class="desktop-nav"><a href="#shop">Shop plants</a><a href="#benefits">Why GreenLeaf</a><a href="#care">Plant care</a></nav><div class="header-actions"><a class="owner-link" href="https://wa.me/919908516488?text=Hello%20GreenLeaf%2C%20I%20need%20some%20help." target="_blank" rel="noopener">☏ <span>Contact</span></a><button class="cart-trigger" id="cartOpen" aria-label="Open cart">Bag <span id="cartCount">0</span></button><button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button></div></header>
+<main><section class="hero"><div class="hero-copy"><span class="eyebrow">ROOTED IN GOOD LIVING</span><h1>Make room for<br><em>something green.</em></h1><p>Thoughtfully chosen plants to bring calm, colour and fresh energy into your everyday spaces.</p><div class="hero-actions"><a class="primary-btn" href="#shop">Explore the collection <span>↗</span></a><a class="text-link" href="https://wa.me/919908516488?text=Hello%20GreenLeaf%2C%20please%20help%20me%20choose%20a%20plant." target="_blank" rel="noopener">Need help choosing? →</a></div><div class="hero-note"><span>✳</span> Plants selected with care. Advice included with every order.</div></div><div class="hero-art"><img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=1100&q=85" alt="Sunlit collection of lush indoor plants"><div class="floating-note"><b>Grow your happy place</b><span>One plant at a time.</span></div></div></section>
+<section class="trust-strip" id="benefits"><div><b>✿ Carefully selected</b><span>Healthy plants, chosen with care</span></div><div><b>♧ Easy plant care</b><span>Guidance for every green friend</span></div><div><b>☏ Real human support</b><span>Talk directly with our nursery</span></div></section>
+<section class="shop-section" id="shop"><div class="section-heading"><div><span class="eyebrow">THE GREENLEAF COLLECTION</span><h2>Find your new <em>favourite.</em></h2><p>From easy-care greens to blooms that brighten your day.</p></div><div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search plants..." aria-label="Search plants"></div></div><div class="filters" id="filters"><button class="filter active" data-category="All">All plants</button><button class="filter" data-category="Indoor">Indoor</button><button class="filter" data-category="Flowering">Flowering</button><button class="filter" data-category="Herbs">Herbs</button><button class="filter" data-category="Outdoor">Outdoor</button><button class="filter" data-category="Pots">Pots & planters</button></div><div class="product-grid" id="productGrid" aria-live="polite"></div></section>
+<section class="care-banner" id="care"><div><span class="eyebrow">A LITTLE HELP GOES A LONG WAY</span><h2>New to plants?<br><em>We've got you.</em></h2><p>Tell us about your space, sunlight and routine. We'll help you find a plant that fits your life.</p><a class="light-btn" href="https://wa.me/919908516488?text=Hello%20GreenLeaf%2C%20help%20me%20choose%20the%20right%20plant%20for%20my%20space." target="_blank" rel="noopener">Get plant recommendations ↗</a></div><div class="care-image"><img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=900&q=85" alt="Green leaves in a bright home"></div></section></main>
+<footer class="footer"><a class="logo footer-logo" href="index.html"><span class="logo-mark">✿</span><span>greenleaf<small>GROW WITH US</small></span></a><p>Bring a little more nature into your everyday.</p><div><a href="https://wa.me/919908516488?text=Hello%20GreenLeaf" target="_blank" rel="noopener">WhatsApp the nursery ↗</a></div><small>© <span id="year"></span> GreenLeaf Nursery. Product availability and delivery are confirmed by our team.</small></footer>
+<div class="wa-float"><a href="https://wa.me/919908516488?text=Hello%20GreenLeaf%2C%20I%20have%20a%20question." target="_blank" rel="noopener" aria-label="Chat with GreenLeaf on WhatsApp">☏</a></div>
+<div class="drawer-backdrop" id="drawerBackdrop"></div><aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag" aria-hidden="true"><div class="drawer-head"><div><span class="eyebrow">YOUR SELECTION</span><h3>Your bag <span id="drawerCount">(0)</span></h3></div><button id="cartClose" aria-label="Close cart">×</button></div><div class="cart-items" id="cartItems"></div><div class="cart-bottom"><div class="subtotal"><span>Estimated subtotal</span><b id="cartTotal">₹0</b></div><small>Final availability, delivery charges and total will be confirmed by the nursery on WhatsApp.</small><button class="primary-btn checkout-btn" id="checkoutBtn">Continue on WhatsApp ↗</button><button class="continue-btn" id="continueShopping">Continue shopping</button></div></aside>
+<div class="modal-backdrop" id="checkoutBackdrop"><section class="checkout-modal"><button class="modal-close" id="checkoutClose" aria-label="Close">×</button><span class="eyebrow">ALMOST THERE</span><h3>Where should we reach you?</h3><p>Share your details. We'll open WhatsApp with your order summary for confirmation.</p><form id="checkoutForm"><label>Your name<input name="name" required maxlength="80" placeholder="Full name"></label><label>Mobile number<input name="phone" required inputmode="tel" pattern="[0-9 +()-]{8,18}" placeholder="Your contact number"></label><label>Delivery address<textarea name="address" required maxlength="500" rows="3" placeholder="House, street, area, city, PIN"></textarea></label><label>Anything else? <small>(optional)</small><textarea name="note" maxlength="300" rows="2" placeholder="Preferred delivery time or plant questions"></textarea></label><button class="primary-btn" type="submit">Send order on WhatsApp ↗</button></form></section></div><div class="toast" id="toast" role="status"></div><script src="js/shop.js"></script></body></html>
